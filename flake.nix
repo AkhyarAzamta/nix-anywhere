@@ -39,7 +39,6 @@
       username = "ms";
       system = "aarch64-darwin";
       hostname = "mrscraper";
-
       specialArgs = {
         inherit username nixvim;
       };
@@ -48,20 +47,14 @@
       darwinConfigurations.${hostname} = nix-darwin.lib.darwinSystem {
         inherit system specialArgs;
         modules = [
-          # Determinate Nix
           determinate.darwinModules.default
-
-          # Home Manager
           home-manager.darwinModules.home-manager
-
-          # Custom modules
           ./modules/nix.nix
           ./modules/darwin
           ./modules/home
         ];
       };
 
-      # Development shell
       devShells.${system}.default =
         let
           pkgs = import nixpkgs { inherit system; };

@@ -11,5 +11,14 @@
     };
 
     ts-autotag.enable = true;
+
+    # Better context (shows function name at top)
+    treesitter-context = {
+      enable = true;
+      settings = {
+        max_lines = 3;
+        trim_scope = "outer";
+      };
+    };
   };
 }

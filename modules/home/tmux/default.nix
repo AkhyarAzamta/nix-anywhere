@@ -1,7 +1,5 @@
 {
-  config,
   pkgs,
-  lib,
   username,
   ...
 }:
@@ -23,23 +21,12 @@
     prefix = "C-a";
 
     extraConfig = ''
-      # Force zsh as default shell
       set -g default-command "${pkgs.zsh}/bin/zsh"
       set -g default-shell "${pkgs.zsh}/bin/zsh"
-
-      # True color support
       set -ag terminal-overrides ",xterm-256color:RGB"
-
-      # Renumber windows when one is closed
       set -g renumber-windows on
-
-      # Don't rename windows automatically
       set -g allow-rename off
-
-      # Enable mouse scrolling and selection
       set -g mouse on
-
-      # Use vi keys in copy mode
       setw -g mode-keys vi
     '';
 

@@ -1,7 +1,4 @@
 {
-  config,
-  pkgs,
-  lib,
   username,
   ...
 }:
@@ -38,11 +35,9 @@
       };
 
       initContent = ''
-        # Key bindings
         bindkey '^[[A' history-search-backward
         bindkey '^[[B' history-search-forward
 
-        # FZF integration
         if command -v fzf &> /dev/null; then
           eval "$(fzf --zsh)"
         fi

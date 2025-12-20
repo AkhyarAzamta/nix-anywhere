@@ -8,6 +8,8 @@ My personal macOS configuration using nix-darwin, home-manager, and nixvim.
 .
 ├── flake.nix                       # Main entry point
 ├── flake.lock
+├── config.nix                      # User configuration (git-ignored)
+├── config.example.nix              # Example configuration
 ├── .envrc                          # Direnv integration
 └── modules/
     ├── nix.nix                     # Nix/Determinate settings
@@ -134,11 +136,42 @@ My personal macOS configuration using nix-darwin, home-manager, and nixvim.
 ```bash
 # Clone the repo
 git clone git@github.com:maulanasdqn/nix-darwin.git ~/.config/nix
-
-# Enter dev shell and rebuild
 cd ~/.config/nix
+
+# Create your configuration
+cp config.example.nix config.nix
+
+# Edit config.nix with your settings
+nvim config.nix
+
+# Build and apply
 nix develop --command rebuild
 ```
+
+## Configuration
+
+Edit `config.nix` to customize your setup:
+
+```nix
+{
+  # Your macOS username
+  username = "your-username";
+
+  # Enable/disable Laravel development environment
+  enableLaravel = true;
+
+  # SSH public keys for authorized_keys
+  sshKeys = [
+    "ssh-ed25519 AAAAC3Nza... user@example.com"
+  ];
+}
+```
+
+| Option | Type | Description |
+|--------|------|-------------|
+| `username` | string | Your macOS username |
+| `enableLaravel` | bool | Enable PHP, Composer, MySQL, PostgreSQL, Redis |
+| `sshKeys` | list | SSH public keys for `~/.ssh/authorized_keys` |
 
 ## Usage
 

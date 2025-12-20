@@ -1,4 +1,4 @@
-{ ... }:
+{ enableLaravel, lib, ... }:
 {
   homebrew = {
     enable = true;
@@ -8,7 +8,7 @@
     };
 
     # Formulae (CLI tools & services)
-    brews = [
+    brews = lib.optionals enableLaravel [
       "mysql"
       "postgresql@16"
       "redis"

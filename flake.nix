@@ -36,11 +36,17 @@
       ...
     }:
     let
-      username = "ms";
+      # Load user configuration from config.nix
+      config = import ./config.nix;
+
+      username = config.username;
+      enableLaravel = config.enableLaravel;
+      sshKeys = config.sshKeys;
+
       system = "aarch64-darwin";
       hostname = "mrscraper";
       specialArgs = {
-        inherit username nixvim;
+        inherit username nixvim enableLaravel sshKeys;
       };
     in
     {

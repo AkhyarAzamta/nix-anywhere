@@ -1,5 +1,8 @@
 {
   username,
+  enableLaravel,
+  sshKeys,
+  lib,
   ...
 }:
 {
@@ -11,6 +14,8 @@
     ./neovim
     ./tmux
     ./docker
+    ./ssh
+  ] ++ lib.optionals enableLaravel [
     ./laravel
   ];
 

@@ -587,11 +587,11 @@
         "rust-overlay": "rust-overlay_3"
       },
       "locked": {
-        "lastModified": 1767774993,
-        "narHash": "sha256-A3Rzn3a+OOJmDzXolAd82pMcDysWHR2yNuqpi7OLXc0=",
+        "lastModified": 1767776869,
+        "narHash": "sha256-viJ3dngWdGvBPf3SMPMsoIfjlF7+J4i39r60wHD1M8M=",
         "owner": "maulanasdqn",
         "repo": "high-performance-youtube-downloader",
-        "rev": "a1a95b830df2a731ad9bfe979179d2fd79550f52",
+        "rev": "7a2d33d8a289fffc8bca4ec86c6d4c631fa0e62b",
         "type": "github"
       },
       "original": {

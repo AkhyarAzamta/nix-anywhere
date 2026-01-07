@@ -14,6 +14,7 @@
     ];
 
     casks = [
+      "google-chrome"
       "microsoft-edge"
       "ghostty"
       "postman"

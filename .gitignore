@@ -2,6 +2,4 @@
 result
 result-*
 
-# Local overrides (optional)
-config.local.nix
 .direnv/

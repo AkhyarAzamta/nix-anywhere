@@ -28,7 +28,7 @@
         fd
         prettierd
         stylua
-        nixfmt-rfc-style
+        nixfmt
         eslint_d
       ];
     };

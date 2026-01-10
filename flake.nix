@@ -72,6 +72,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    rkm-frontend = {
+      url = "git+ssh://git@github.com/rajawalikaryamulya/rkm-frontend.git?ref=develop";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # BSM Projects for testing
     bsmart-landing = {
       url = "git+ssh://git@gitlab.com/mrzte/bsmart-landing.git?ref=develop";
@@ -116,6 +121,7 @@
       fta-server,
       hpyd,
       rkm-backend,
+      rkm-frontend,
       bsmart-landing,
       echo-frontend,
       echo-backend,
@@ -259,6 +265,7 @@
           ydm-backend.nixosModules.default
           hpyd.nixosModules.default
           rkm-backend.nixosModules.default
+          rkm-frontend.nixosModules.default
           ./hosts/vps/hostinger
           home-manager.nixosModules.home-manager
           {

@@ -20,6 +20,7 @@
     ./services/ydm.nix
     ./services/hpyd.nix
     ./services/rkm-backend.nix
+    ./services/rkm-frontend.nix
   ];
 
   services.nixos-git-sync = {

@@ -859,6 +859,27 @@
         "url": "ssh://git@github.com/rajawalikaryamulya/rkm-backend.git"
       }
     },
+    "rkm-frontend": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1768021199,
+        "narHash": "sha256-MobO52Era3m86n05nTye16PdrZwjbHooSBA1CyvlXQk=",
+        "ref": "develop",
+        "rev": "984e01f0837373efdbfaf8df4e3044cb6b2a2741",
+        "revCount": 2,
+        "type": "git",
+        "url": "ssh://git@github.com/rajawalikaryamulya/rkm-frontend.git"
+      },
+      "original": {
+        "ref": "develop",
+        "type": "git",
+        "url": "ssh://git@github.com/rajawalikaryamulya/rkm-frontend.git"
+      }
+    },
     "root": {
       "inputs": {
         "bsmart-landing": "bsmart-landing",
@@ -879,6 +900,7 @@
         "nixvim": "nixvim",
         "personal-website": "personal-website",
         "rkm-backend": "rkm-backend",
+        "rkm-frontend": "rkm-frontend",
         "sops-nix": "sops-nix",
         "ydm-backend": "ydm-backend",
         "ydm-frontend": "ydm-frontend"

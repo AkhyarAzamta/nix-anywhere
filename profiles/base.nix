@@ -5,17 +5,16 @@
   sshKeys,
   ...
 }:
-let
-  # Fallback SSH key in case sshKeys is empty
-  fallbackKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICdLKnxrQl735W+ANR4dnWTrNEMmrIzv7TioI0teJmMZ ms@computer";
-  allSshKeys = if sshKeys == [] then [ fallbackKey ] else sshKeys;
-in
 {
-  # Ensure username is never empty
+  # Ensure config is valid
   assertions = [
     {
       assertion = username != "";
       message = "username must not be empty";
+    }
+    {
+      assertion = sshKeys != [];
+      message = "sshKeys must not be empty - you will be locked out!";
     }
   ];
 
@@ -56,12 +55,12 @@ in
     uid = 1000;
     extraGroups = [ "wheel" ];
     shell = pkgs.zsh;
-    openssh.authorizedKeys.keys = allSshKeys;
+    openssh.authorizedKeys.keys = sshKeys;
     createHome = true;
     home = "/home/${username}";
   };
 
-  users.users.root.openssh.authorizedKeys.keys = allSshKeys;
+  users.users.root.openssh.authorizedKeys.keys = sshKeys;
 
   programs.zsh.enable = true;
 

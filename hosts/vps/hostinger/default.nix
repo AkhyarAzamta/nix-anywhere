@@ -1,4 +1,9 @@
-{ hostname, ipAddress, gateway, ... }:
+{
+  hostname,
+  ipAddress,
+  gateway,
+  ...
+}:
 {
   imports = [
     ./hardware.nix
@@ -13,11 +18,6 @@
     ./services/mailserver.nix
     ./services/roundcube.nix
     ./services/minio.nix
-    ./services/fta-server.nix
-    # BSM Test Services
-    ./services/bsmart-landing.nix
-    ./services/echo.nix
-    ./services/ydm.nix
     ./services/hpyd.nix
     ./services/rkm-backend.nix
     ./services/rkm-frontend.nix
@@ -38,6 +38,9 @@
       }
     ];
     defaultGateway = gateway;
-    nameservers = [ "8.8.8.8" "1.1.1.1" ];
+    nameservers = [
+      "8.8.8.8"
+      "1.1.1.1"
+    ];
   };
 }

@@ -57,11 +57,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    fta-server = {
-      url = "github:maulanasdqn/rust-backend-best-practice/develop";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     hpyd = {
       url = "github:maulanasdqn/high-performance-youtube-downloader/develop";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -76,37 +71,10 @@
       url = "git+ssh://git@github.com/rajawalikaryamulya/rkm-frontend.git?ref=develop";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # BSM Projects for testing
-    bsmart-landing = {
-      url = "git+ssh://git@gitlab.com/mrzte/bsmart-landing.git?ref=develop";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    echo-frontend = {
-      url = "git+ssh://git@gitlab.com/mrzte/echo-frontend.git?ref=develop";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    echo-backend = {
-      url = "git+ssh://git@gitlab.com/mrzte/echo-backend.git?ref=develop";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    ydm-frontend = {
-      url = "git+ssh://git@gitlab.com/mrzte/yes-date-me-frontend.git?ref=beta";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    ydm-backend = {
-      url = "git+ssh://git@gitlab.com/mrzte/yes-date-me-backend.git?ref=develop";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
     {
-      self,
       nixpkgs,
       nix-darwin,
       home-manager,
@@ -118,15 +86,9 @@
       homebrew-cask,
       disko,
       personal-website,
-      fta-server,
       hpyd,
       rkm-backend,
       rkm-frontend,
-      bsmart-landing,
-      echo-frontend,
-      echo-backend,
-      ydm-frontend,
-      ydm-backend,
       ...
     }:
     let
@@ -256,13 +218,6 @@
         modules = [
           disko.nixosModules.disko
           personal-website.nixosModules.default
-          fta-server.nixosModules.default
-          # BSM Projects
-          bsmart-landing.nixosModules.default
-          echo-frontend.nixosModules.default
-          echo-backend.nixosModules.default
-          ydm-frontend.nixosModules.default
-          ydm-backend.nixosModules.default
           hpyd.nixosModules.default
           rkm-backend.nixosModules.default
           rkm-frontend.nixosModules.default

@@ -217,8 +217,8 @@
         specialArgs = hostingerSpecialArgs;
         modules = [
           disko.nixosModules.disko
+          sops-nix.nixosModules.sops
           personal-website.nixosModules.default
-          hpyd.nixosModules.default
           rkm-backend.nixosModules.default
           rkm-frontend.nixosModules.default
           ./hosts/vps/hostinger

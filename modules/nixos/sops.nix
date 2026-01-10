@@ -1,9 +1,5 @@
-{ config, sops-nix, secretsFile, ... }:
+{ config, secretsFile, ... }:
 {
-  imports = [
-    sops-nix.nixosModules.sops
-  ];
-
   sops = {
     defaultSopsFile = secretsFile;
 

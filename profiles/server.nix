@@ -9,7 +9,17 @@
     ./base.nix
   ];
 
+  # Enable zram swap to prevent OOM during builds
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+    memoryPercent = 50;  # Use 50% of RAM as compressed swap
+  };
+
+  # Limit Nix build parallelism to prevent OOM
   nix.settings = {
+    max-jobs = 1;  # Only 1 build job at a time
+    cores = 2;     # Use max 2 cores per build
     substituters = [
       "https://cache.nixos.org"
       "https://msdqn.cachix.org"

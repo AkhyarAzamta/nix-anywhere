@@ -36,11 +36,16 @@
     tmp.cleanOnBoot = true;
   };
 
+  users.mutableUsers = true;
+
   users.users.${username} = {
     isNormalUser = true;
+    uid = 1000;
     extraGroups = [ "wheel" ];
     shell = pkgs.zsh;
     openssh.authorizedKeys.keys = sshKeys;
+    createHome = true;
+    home = "/home/${username}";
   };
 
   users.users.root.openssh.authorizedKeys.keys = sshKeys;

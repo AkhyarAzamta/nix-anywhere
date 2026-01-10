@@ -9,7 +9,6 @@
     ./hardware.nix
     ./disk-config.nix
     ../../../profiles/server.nix
-    ../../../modules/nixos/git-sync.nix
     ./services/personal-website.nix
     ./services/n8n.nix
     ./services/uptime-kuma.nix
@@ -22,11 +21,6 @@
     ./services/rkm-backend.nix
     ./services/rkm-frontend.nix
   ];
-
-  services.nixos-git-sync = {
-    enable = true;
-    flakeTarget = "hostinger";
-  };
 
   networking = {
     hostName = hostname;

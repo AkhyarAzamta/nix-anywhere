@@ -22,26 +22,38 @@
 
   time.timeZone = lib.mkForce "UTC";
 
-  # Root gets docker access
-  users.users.root.extraGroups = [ "docker" ];
-
   networking = {
     useDHCP = lib.mkDefault true;
     networkmanager.enable = false;
 
     firewall = {
       enable = true;
+      allowPing = false;
+      logReversePathDrops = true;
+      logRefusedConnections = true;
       allowedTCPPorts = [
-        22
-        80
-        443
+        22   # SSH
+        80   # HTTP (nginx)
+        443  # HTTPS (nginx)
       ];
       allowedUDPPorts = [ ];
+      # Block common attack vectors
+      extraCommands = ''
+        # Rate limit SSH connections
+        iptables -I INPUT -p tcp --dport 22 -m state --state NEW -m recent --set
+        iptables -I INPUT -p tcp --dport 22 -m state --state NEW -m recent --update --seconds 60 --hitcount 4 -j DROP
+      '';
+      extraStopCommands = ''
+        iptables -D INPUT -p tcp --dport 22 -m state --state NEW -m recent --set 2>/dev/null || true
+        iptables -D INPUT -p tcp --dport 22 -m state --state NEW -m recent --update --seconds 60 --hitcount 4 -j DROP 2>/dev/null || true
+      '';
     };
   };
 
   services.openssh = {
     enable = true;
+    ports = [ 22 ];
+    openFirewall = true;
     settings = {
       PasswordAuthentication = false;
       PermitRootLogin = "prohibit-password";
@@ -49,6 +61,11 @@
       X11Forwarding = false;
       AllowTcpForwarding = false;
       AllowAgentForwarding = false;
+      PermitEmptyPasswords = false;
+      MaxAuthTries = 3;
+      LoginGraceTime = 20;
+      ClientAliveInterval = 300;
+      ClientAliveCountMax = 2;
     };
   };
 
@@ -86,17 +103,73 @@
     bantime = "1h";
     bantime-increment = {
       enable = true;
-      maxtime = "48h";
+      maxtime = "168h";  # 1 week max ban
+      multipliers = "1 2 4 8 16 32 64";
+    };
+    jails = {
+      sshd = {
+        settings = {
+          enabled = true;
+          port = "ssh";
+          filter = "sshd";
+          maxretry = 3;
+          bantime = "1h";
+        };
+      };
+      nginx-http-auth = {
+        settings = {
+          enabled = true;
+          port = "http,https";
+          filter = "nginx-http-auth";
+          maxretry = 3;
+          bantime = "1h";
+        };
+      };
+      nginx-botsearch = {
+        settings = {
+          enabled = true;
+          port = "http,https";
+          filter = "nginx-botsearch";
+          maxretry = 5;
+          bantime = "1h";
+        };
+      };
     };
   };
 
   boot.kernel.sysctl = {
+    # Network hardening
     "net.ipv4.conf.all.rp_filter" = 1;
     "net.ipv4.conf.default.rp_filter" = 1;
     "net.ipv4.conf.all.accept_redirects" = 0;
+    "net.ipv4.conf.default.accept_redirects" = 0;
     "net.ipv6.conf.all.accept_redirects" = 0;
+    "net.ipv6.conf.default.accept_redirects" = 0;
+    "net.ipv4.conf.all.send_redirects" = 0;
+    "net.ipv4.conf.default.send_redirects" = 0;
     "net.ipv4.tcp_syncookies" = 1;
     "net.ipv4.icmp_echo_ignore_broadcasts" = 1;
+    "net.ipv4.icmp_ignore_bogus_error_responses" = 1;
+    "net.ipv4.conf.all.log_martians" = 1;
+    "net.ipv4.conf.default.log_martians" = 1;
+
+    # Disable source routing
+    "net.ipv4.conf.all.accept_source_route" = 0;
+    "net.ipv4.conf.default.accept_source_route" = 0;
+    "net.ipv6.conf.all.accept_source_route" = 0;
+    "net.ipv6.conf.default.accept_source_route" = 0;
+
+    # Kernel hardening
+    "kernel.kptr_restrict" = 2;
+    "kernel.dmesg_restrict" = 1;
+    "kernel.perf_event_paranoid" = 3;
+    "kernel.yama.ptrace_scope" = 2;
+    "kernel.unprivileged_bpf_disabled" = 1;
+    "net.core.bpf_jit_harden" = 2;
+
+    # TCP hardening
+    "net.ipv4.tcp_rfc1337" = 1;
+    "net.ipv4.tcp_timestamps" = 0;
   };
 
   security.pam.loginLimits = [
@@ -114,45 +187,68 @@
     }
   ];
 
-  virtualisation.docker = {
+  # Use podman instead of docker
+  virtualisation.podman = {
     enable = true;
-    enableOnBoot = true;
+    dockerCompat = true;
     autoPrune = {
       enable = true;
       dates = "weekly";
     };
+    defaultNetwork.settings.dns_enabled = true;
   };
 
-  system.autoUpgrade = {
-    enable = true;
-    allowReboot = false;
-    dates = "04:00";
-  };
+  # Enable container networking
+  virtualisation.oci-containers.backend = "podman";
+
+  # Disable auto-upgrade - use manual deploys from GitHub
+  system.autoUpgrade.enable = false;
 
   services.logrotate.enable = true;
   services.avahi.enable = false;
   services.printing.enable = false;
 
+  # Additional security hardening
+  security.protectKernelImage = true;
+  security.lockKernelModules = false;  # Required for containers
+
+  # Audit logging
+  security.auditd.enable = true;
+  security.audit = {
+    enable = true;
+    rules = [
+      "-a exit,always -F arch=b64 -S execve"  # Log all executions
+    ];
+  };
+
+  # Disable unnecessary services
+  services.xserver.enable = false;
+  sound.enable = false;
+  hardware.pulseaudio.enable = false;
+
   environment.systemPackages = with pkgs; [
+    # System monitoring
     htop
     iotop
     ncdu
     bottom
+
+    # Utilities
     tmux
     ripgrep
     fd
     jq
     yq
-    docker-compose
-    lazydocker
     curl
     wget
-    httpie
     git
-    nodejs_22
-    nodePackages.npm
-    neofetch
-    cachix
+
+    # Container management
+    podman-compose
+
+    # Security tools
+    lynis        # Security auditing
+    rkhunter     # Rootkit hunter
   ];
 
 }

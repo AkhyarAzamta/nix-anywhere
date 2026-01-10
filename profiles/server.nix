@@ -246,7 +246,7 @@
 
     # Security tools
     lynis        # Security auditing
-    rkhunter     # Rootkit hunter
+    unhide       # Forensic tool to find hidden processes
   ];
 
 }

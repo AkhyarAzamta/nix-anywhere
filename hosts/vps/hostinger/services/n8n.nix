@@ -2,7 +2,7 @@
 {
   virtualisation.oci-containers.containers.n8n = {
     image = "n8nio/n8n:latest";
-    ports = [ "5678:5678" ];
+    ports = [ "127.0.0.1:5678:5678" ];
     volumes = [ "/var/lib/n8n:/home/node/.n8n" ];
     environmentFiles = [ "/etc/n8n.env" ];
   };

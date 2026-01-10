@@ -3,8 +3,8 @@
   virtualisation.oci-containers.containers.minio = {
     image = "minio/minio:latest";
     ports = [
-      "9002:9000"  # S3 API
-      "9003:9001"  # Console
+      "127.0.0.1:9002:9000"  # S3 API
+      "127.0.0.1:9003:9001"  # Console
     ];
     volumes = [ "/var/lib/minio/data:/data" ];
     environmentFiles = [ "/etc/minio.env" ];

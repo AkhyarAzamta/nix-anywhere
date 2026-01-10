@@ -2,7 +2,7 @@
 {
   virtualisation.oci-containers.containers.netdata = {
     image = "netdata/netdata:v1.40.1";
-    ports = [ "19999:19999" ];
+    ports = [ "127.0.0.1:19999:19999" ];
     volumes = [
       "/var/lib/netdata-config/netdata.conf:/etc/netdata/netdata.conf:ro"
       "netdatalib:/var/lib/netdata"
@@ -36,6 +36,7 @@
   services.nginx.virtualHosts."netdata.msdqn.dev" = {
     enableACME = true;
     forceSSL = true;
+    basicAuthFile = "/etc/nginx/htpasswd-netdata";
     locations."/" = {
       proxyPass = "http://127.0.0.1:19999";
       proxyWebsockets = true;

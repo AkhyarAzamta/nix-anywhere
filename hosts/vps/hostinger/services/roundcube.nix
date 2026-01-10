@@ -10,7 +10,7 @@
 
     roundcube = {
       image = "roundcube/roundcubemail:latest";
-      ports = [ "9000:80" ];
+      ports = [ "127.0.0.1:9000:80" ];
       dependsOn = [ "roundcube-db" ];
       environment = {
         ROUNDCUBEMAIL_DEFAULT_HOST = "ssl://mail.msdqn.dev";

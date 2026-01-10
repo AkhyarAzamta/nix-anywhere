@@ -15,7 +15,7 @@
 
     glitchtip-web = {
       image = "glitchtip/glitchtip:latest";
-      ports = [ "8000:8000" ];
+      ports = [ "127.0.0.1:8000:8000" ];
       dependsOn = [ "glitchtip-postgres" "glitchtip-redis" ];
       environmentFiles = [ "/etc/glitchtip.env" ];
       extraOptions = [ "--network=glitchtip-net" ];

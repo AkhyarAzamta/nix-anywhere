@@ -736,11 +736,11 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1768024056,
-        "narHash": "sha256-2Nr7JxBK1XdYn+y0c7rBQY/PqmTewWgaVu0UreMi+PM=",
+        "lastModified": 1768049901,
+        "narHash": "sha256-NgjQVkvX3jeDp1ko4dny3EM60xLE1YYHjzoA4AdXbgc=",
         "ref": "develop",
-        "rev": "575cebf8b8d9ffa4c6244e4d4e9563e762d3e2a9",
-        "revCount": 11,
+        "rev": "2c463dd9c711fbb48380131dac41e01e12e7cd81",
+        "revCount": 12,
         "type": "git",
         "url": "ssh://git@github.com/rajawalikaryamulya/rkm-backend.git"
       },

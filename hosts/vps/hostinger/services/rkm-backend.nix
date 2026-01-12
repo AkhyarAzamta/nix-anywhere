@@ -24,7 +24,7 @@
       MINIO_SECRET_KEY = "MinioSecure2026!";
       MINIO_BUCKET = "rkm-media";
       MINIO_REGION = "us-east-1";
-      MINIO_PUBLIC_URL = "https://s3.msdqn.dev";
+      MINIO_PUBLIC_URL = "https://s3.msdqn.dev/rkm-media";
     };
   };
 }

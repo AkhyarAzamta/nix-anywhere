@@ -227,7 +227,7 @@
           personal-website.nixosModules.default
           rkm-backend.nixosModules.default
           rkm-frontend.nixosModules.default
-          # rkm-admin-frontend.nixosModules.default  # disabled for now
+          rkm-admin-frontend.nixosModules.default
           ./hosts/vps/hostinger
         ];
       };

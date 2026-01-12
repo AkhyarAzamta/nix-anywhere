@@ -15,6 +15,7 @@
     ./services/rkm-frontend.nix
     ./services/rkm-admin-frontend.nix
     ./services/backup.nix
+    ./services/yes-date-me-backup.nix
   ];
 
   networking = {

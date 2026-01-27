@@ -21,19 +21,20 @@
       export ICON_COLOR=$WHITE
       export LABEL_COLOR=$WHITE
 
+      # DWM-style bar at bottom
       sketchybar --bar \
         height=32 \
         color=$BAR_COLOR \
-        shadow=on \
-        position=top \
+        shadow=off \
+        position=bottom \
         sticky=on \
         padding_right=10 \
         padding_left=10 \
         corner_radius=0 \
         y_offset=0 \
         margin=0 \
-        blur_radius=20 \
-        notch_width=188
+        blur_radius=0 \
+        notch_width=0
 
       sketchybar --default \
         icon.font="Hack Nerd Font Mono:Bold:14.0" \

@@ -4,6 +4,7 @@
   username,
   enableRust,
   enableVolta,
+  enableGolang,
   ...
 }:
 {
@@ -24,7 +25,8 @@
         speedtest-cli
       ]
       ++ lib.optionals enableRust [ rustup ]
-      ++ lib.optionals enableVolta [ volta ];
+      ++ lib.optionals enableVolta [ volta ]
+      ++ lib.optionals enableGolang [ go gopls ];
 
     home.sessionVariables =
       {
@@ -41,6 +43,10 @@
       }
       // lib.optionalAttrs enableVolta {
         VOLTA_HOME = "$HOME/.volta";
+      }
+      // lib.optionalAttrs enableGolang {
+        GOPATH = "$HOME/go";
+        GOBIN = "$HOME/go/bin";
       };
 
     home.sessionPath =
@@ -50,6 +56,7 @@
         "$HOME/.npm-global/bin"
       ]
       ++ lib.optionals enableRust [ "$HOME/.cargo/bin" ]
-      ++ lib.optionals enableVolta [ "$HOME/.volta/bin" ];
+      ++ lib.optionals enableVolta [ "$HOME/.volta/bin" ]
+      ++ lib.optionals enableGolang [ "$HOME/go/bin" ];
   };
 }

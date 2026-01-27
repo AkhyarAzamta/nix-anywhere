@@ -121,6 +121,7 @@
         enableLaravel
         enableRust
         enableVolta
+        enableGolang
         ;
       secretsFile = ./secrets/secrets.yaml;
 
@@ -132,6 +133,7 @@
           enableLaravel
           enableRust
           enableVolta
+          enableGolang
           sshKeys
           sops-nix
           secretsFile
@@ -146,6 +148,7 @@
           enableLaravel
           enableRust
           enableVolta
+          enableGolang
           sshKeys
           ;
       };

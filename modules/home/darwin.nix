@@ -3,6 +3,7 @@
   enableLaravel,
   enableRust,
   enableVolta,
+  enableGolang,
   sshKeys,
   lib,
   ...

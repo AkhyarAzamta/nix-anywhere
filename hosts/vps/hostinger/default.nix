@@ -19,6 +19,13 @@
     ./services/minio.nix
   ];
 
+  swapDevices = [
+    {
+      device = "/swapfile";
+      size = 2048; # 2GB
+    }
+  ];
+
   networking = {
     hostName = hostname;
     useDHCP = false;

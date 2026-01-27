@@ -4,6 +4,7 @@
     image = "louislam/uptime-kuma:1";
     ports = [ "127.0.0.1:3001:3001" ];
     volumes = [ "/var/lib/uptime-kuma:/app/data" ];
+    extraOptions = [ "--memory=512m" ];
   };
 
   systemd.tmpfiles.rules = [

@@ -10,7 +10,7 @@
     NSAutomaticWindowAnimationsEnabled = false;
     NSWindowResizeTime = 0.001;
 
-    _HIHideMenuBar = true;
+    _HIHideMenuBar = false;
 
     AppleEnableSwipeNavigateWithScrolls = false;
 

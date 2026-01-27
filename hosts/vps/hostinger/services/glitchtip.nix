@@ -5,12 +5,12 @@
       image = "postgres:15-alpine";
       volumes = [ "/var/lib/glitchtip/postgres:/var/lib/postgresql/data" ];
       environmentFiles = [ "/etc/glitchtip-postgres.env" ];
-      extraOptions = [ "--network=glitchtip-net" ];
+      extraOptions = [ "--network=glitchtip-net" "--memory=256m" ];
     };
 
     glitchtip-redis = {
       image = "redis:7-alpine";
-      extraOptions = [ "--network=glitchtip-net" ];
+      extraOptions = [ "--network=glitchtip-net" "--memory=128m" ];
     };
 
     glitchtip-web = {
@@ -18,7 +18,7 @@
       ports = [ "127.0.0.1:8000:8000" ];
       dependsOn = [ "glitchtip-postgres" "glitchtip-redis" ];
       environmentFiles = [ "/etc/glitchtip.env" ];
-      extraOptions = [ "--network=glitchtip-net" ];
+      extraOptions = [ "--network=glitchtip-net" "--memory=512m" ];
     };
 
     glitchtip-worker = {
@@ -26,7 +26,7 @@
       dependsOn = [ "glitchtip-postgres" "glitchtip-redis" ];
       cmd = [ "./bin/run-celery-with-beat.sh" ];
       environmentFiles = [ "/etc/glitchtip.env" ];
-      extraOptions = [ "--network=glitchtip-net" ];
+      extraOptions = [ "--network=glitchtip-net" "--memory=512m" ];
     };
   };
 

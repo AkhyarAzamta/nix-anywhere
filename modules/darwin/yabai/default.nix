@@ -9,13 +9,14 @@ let
     /usr/local/bin/yabai -m config layout bsp
     /usr/local/bin/yabai -m config auto_balance off
 
-    /usr/local/bin/yabai -m config external_bar all:32:0
+    # DWM-style: no gaps, no bar
+    /usr/local/bin/yabai -m config external_bar all:0:0
 
-    /usr/local/bin/yabai -m config top_padding 5
-    /usr/local/bin/yabai -m config bottom_padding 10
-    /usr/local/bin/yabai -m config left_padding 10
-    /usr/local/bin/yabai -m config right_padding 10
-    /usr/local/bin/yabai -m config window_gap 10
+    /usr/local/bin/yabai -m config top_padding 0
+    /usr/local/bin/yabai -m config bottom_padding 0
+    /usr/local/bin/yabai -m config left_padding 0
+    /usr/local/bin/yabai -m config right_padding 0
+    /usr/local/bin/yabai -m config window_gap 0
 
     /usr/local/bin/yabai -m config mouse_follows_focus off
     /usr/local/bin/yabai -m config focus_follows_mouse autofocus
@@ -25,7 +26,7 @@ let
     /usr/local/bin/yabai -m config mouse_drop_action swap
 
     /usr/local/bin/yabai -m config window_placement second_child
-    /usr/local/bin/yabai -m config window_shadow float
+    /usr/local/bin/yabai -m config window_shadow off
     /usr/local/bin/yabai -m config window_opacity off
     /usr/local/bin/yabai -m config split_ratio 0.5
 

@@ -1,9 +1,10 @@
 {
-  darwinUsername = "ms";
+  darwinUsername = "azam";
   darwinHostname = "mrscraper";
   darwinEnableTilingWM = true;
 
-  workstationUsername = "ms";
+  workstationUsername = "azam";
+  workstationPassword = "nixos";
   workstationHostname = "workstation";
   workstationEnableTilingWM = true;
 
@@ -12,7 +13,7 @@
   vpsHostingerIP = "72.62.125.38";
   vpsHostingerGateway = "72.62.125.254";
 
-  acmeEmail = "maulanasdqn@gmail.com";
+  acmeEmail = "akhyar.azamta@gmail.com";
 
   vpsDigitalOceanUsername = "ms";
   vpsDigitalOceanHostname = "droplet";
@@ -22,6 +23,6 @@
   enableVolta = true;
 
   sshKeys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICdLKnxrQl735W+ANR4dnWTrNEMmrIzv7TioI0teJmMZ ms@computer"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMiThJQU2sH7dZNoAj+unVHhEKrRoyKhwDiFDaaJPEGs ervan@akhyarazamta.com"
   ];
 }

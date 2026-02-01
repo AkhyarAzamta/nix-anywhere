@@ -3,6 +3,7 @@
   pkgs,
   username,
   sshKeys,
+  userPassword ? null,
   ...
 }:
 {
@@ -57,10 +58,30 @@
         openssh.authorizedKeys.keys = sshKeys;
         createHome = true;
         home = "/home/${username}";
+        
+        # 🔐 PASSWORD SETTINGS - Pilih salah satu opsi di bawah:
+        
+        # Opsi 1: Initial password (password sementara, bisa diganti user nanti)
+        initialPassword = lib.mkIf (userPassword != null) userPassword;
+        
+        # Opsi 2: Hashed password (lebih aman, permanent)
+        # Uncomment dan ganti dengan hash password Anda
+        # Generate dengan: mkpasswd -m sha-512
+        # hashedPassword = "$6$rounds=656000$YourHashedPasswordHere";
+        
+        # Opsi 3: Password dari file terenkripsi (paling aman untuk production)
+        # hashedPasswordFile = "/etc/nixos/secrets/user-password";
       };
     })
     {
+      # Root user settings
       root.openssh.authorizedKeys.keys = sshKeys;
+      
+      # Optional: Set root password
+      # Untuk workstation, bisa pakai initialPassword
+      # Untuk server/VPS, DISABLE root password untuk keamanan
+      # root.initialPassword = "nixos";  # Untuk workstation
+      # root.hashedPassword = "!";  # Untuk server (disable root login)
     }
   ];
 
@@ -68,7 +89,7 @@
 
   security.sudo = {
     enable = true;
-    wheelNeedsPassword = false;
+    wheelNeedsPassword = false;  # User di group wheel tidak perlu password untuk sudo
   };
 
   nix.settings = {
@@ -96,6 +117,7 @@
     wget
     curl
     git
+    mkpasswd  # Tool untuk generate password hash
   ];
 
   system.stateVersion = "25.05";

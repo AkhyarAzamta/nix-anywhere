@@ -15,6 +15,7 @@
     ./tmux
     ./ssh
     ./vscode
+    ./gnome-shortcuts.nix
   ] ++ lib.optionals enableTilingWM [
     ./hyprland
   ];

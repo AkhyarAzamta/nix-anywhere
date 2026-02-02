@@ -1,28 +1,28 @@
 {
-  darwinUsername = "azam";
-  darwinHostname = "mrscraper";
+  darwinUsername = "your-username";
+  darwinHostname = "your-mac-hostname";
   darwinEnableTilingWM = true;
 
-  workstationUsername = "azam";
-  workstationPassword = "nixos";
-  workstationHostname = "workstation";
+  workstationUsername = "your-username";
+  workstationPassword = "your-password";
+  workstationHostname = "nixos";
   workstationEnableTilingWM = true;
 
-  vpsHostingerUsername = "ms";
-  vpsHostingerHostname = "msdqn";
-  vpsHostingerIP = "72.62.125.38";
-  vpsHostingerGateway = "72.62.125.254";
+  vpsHostingerUsername = "your-username";
+  vpsHostingerHostname = "your-vps-hostname";
+  vpsHostingerIP = "0.0.0.0";
+  vpsHostingerGateway = "0.0.0.0";
 
-  acmeEmail = "akhyar.azamta@gmail.com";
+  acmeEmail = "your-email@example.com";
 
-  vpsDigitalOceanUsername = "ms";
-  vpsDigitalOceanHostname = "droplet";
+  vpsDigitalOceanUsername = "your-username";
+  vpsDigitalOceanHostname = "your-droplet-hostname";
 
-  enableLaravel = false; # Disabled due to nixpkgs composer bug
+  enableLaravel = false;
   enableRust = true;
   enableVolta = true;
 
   sshKeys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMiThJQU2sH7dZNoAj+unVHhEKrRoyKhwDiFDaaJPEGs ervan@akhyarazamta.com"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAA... your-key@example.com"
   ];
 }

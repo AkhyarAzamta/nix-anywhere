@@ -4,7 +4,7 @@
   darwinEnableTilingWM = true;
 
   workstationUsername = "azam";
-  workstationPassword = "nixos";
+  workstationPassword = "toor";
   workstationHostname = "workstation";
   workstationEnableTilingWM = true;
 
@@ -18,7 +18,7 @@
   vpsDigitalOceanUsername = "ms";
   vpsDigitalOceanHostname = "droplet";
 
-  enableLaravel = false; # Disabled due to nixpkgs composer bug
+  enableLaravel = false;
   enableRust = true;
   enableVolta = true;
 

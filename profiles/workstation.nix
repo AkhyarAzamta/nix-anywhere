@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   pkgs,
   username,
@@ -6,10 +7,26 @@
   hostname ? "nixos",
   ...
 }:
+let
+  # Ambil swap device pertama secara otomatis dari swapDevices
+  swapDevices = config.swapDevices;
+  hasSwap = swapDevices != [ ];
+  firstSwap = if hasSwap then (builtins.head swapDevices) else null;
+  resumeDevice = if firstSwap != null then firstSwap.device else null;
+in
 {
   imports = [
     ./base.nix
   ];
+
+  # Hibernate configuration - otomatis dari swapDevices
+  boot.resumeDevice = lib.mkIf (resumeDevice != null) resumeDevice;
+
+  systemd.sleep.extraConfig = lib.mkIf (resumeDevice != null) ''
+    AllowHibernation=yes
+    AllowSuspendThenHibernate=yes
+    HibernateDelaySec=1h
+  '';
 
   users.users.${username}.extraGroups = [
     "wheel"

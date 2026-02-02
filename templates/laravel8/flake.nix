@@ -1,5 +1,5 @@
 {
-  description = "Laravel 12 Development Environment (PHP 8.3)";
+  description = "Laravel 8 Development Environment (PHP 8.1)";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -18,22 +18,22 @@
 
       perSystem = { config, self', inputs', pkgs, system, ... }: {
         devenv.shells.default = {
-          name = "laravel12";
+          name = "laravel8";
 
           languages.php = {
             enable = true;
-            package = pkgs.php83;
+            package = pkgs.php81;
             extensions = [ "mbstring" "openssl" "pdo" "pdo_mysql" "pdo_pgsql" "tokenizer" "xml" "ctype" "json" "bcmath" "curl" "gd" "zip" "redis" ];
           };
 
           languages.javascript = {
             enable = true;
-            package = pkgs.nodejs_22;
+            package = pkgs.nodejs_18;
           };
 
           packages = with pkgs; [
-            php83Packages.composer
-            php83Packages.php-cs-fixer
+            php81Packages.composer
+            php81Packages.php-cs-fixer
             nodePackages.npm
             mysql-client
             redis
@@ -49,7 +49,7 @@
           scripts.test.exec = "php artisan test";
 
           enterShell = ''
-            echo "Laravel 12 Development Environment"
+            echo "Laravel 8 Development Environment"
             echo "PHP: $(php -v | head -1)"
             echo "Composer: $(composer --version)"
             echo "Node: $(node --version)"

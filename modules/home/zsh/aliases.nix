@@ -10,6 +10,8 @@
     ss = "ls -t ~/Desktop/*.png 2>/dev/null | head -1";
 
     init-laravel = "cp ~/.config/nix/templates/laravel/{flake.nix,.envrc} . && direnv allow";
+    init-laravel8 = "cp ~/.config/nix/templates/laravel8/{flake.nix,.envrc} . && direnv allow";
+    init-laravel10 = "cp ~/.config/nix/templates/laravel10/{flake.nix,.envrc} . && direnv allow";
     init-nodejs = "cp ~/.config/nix/templates/nodejs/{flake.nix,.envrc} . && direnv allow";
     init-rust = "cp ~/.config/nix/templates/rust/{flake.nix,.envrc} . && direnv allow";
     init-prisma = "cp ~/.config/nix/templates/prisma/{flake.nix,.envrc} . && direnv allow";

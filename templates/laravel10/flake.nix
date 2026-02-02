@@ -1,5 +1,5 @@
 {
-  description = "Laravel 12 Development Environment (PHP 8.3)";
+  description = "Laravel 10 Development Environment (PHP 8.3)";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -18,7 +18,7 @@
 
       perSystem = { config, self', inputs', pkgs, system, ... }: {
         devenv.shells.default = {
-          name = "laravel12";
+          name = "laravel10";
 
           languages.php = {
             enable = true;
@@ -49,7 +49,7 @@
           scripts.test.exec = "php artisan test";
 
           enterShell = ''
-            echo "Laravel 12 Development Environment"
+            echo "Laravel 10 Development Environment"
             echo "PHP: $(php -v | head -1)"
             echo "Composer: $(composer --version)"
             echo "Node: $(node --version)"

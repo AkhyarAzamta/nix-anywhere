@@ -50,7 +50,6 @@ My personal unified Nix configuration for both **NixOS** and **macOS** (nix-darw
     ├── nixos/                      # NixOS-specific modules
     │   ├── default.nix
     │   ├── boot.nix
-    │   ├── hardware.nix
     │   ├── networking.nix
     │   ├── locale.nix
     │   ├── desktop.nix

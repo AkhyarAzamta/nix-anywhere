@@ -12,6 +12,7 @@
     ./locale.nix
     ./desktop.nix
     ./audio.nix
+    ./bluetooth.nix
     ./users.nix
     ./fonts.nix
     ./programs.nix

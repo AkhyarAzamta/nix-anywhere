@@ -35,7 +35,7 @@
             php81Packages.composer
             php81Packages.php-cs-fixer
             nodePackages.npm
-            mysql-client
+            mariadb
             redis
           ];
 

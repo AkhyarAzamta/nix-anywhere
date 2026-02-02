@@ -35,7 +35,7 @@
             php83Packages.composer
             php83Packages.php-cs-fixer
             nodePackages.npm
-            mysql-client
+            mariadb
             redis
           ];
 

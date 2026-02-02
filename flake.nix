@@ -143,6 +143,7 @@
       workstationSpecialArgs = {
         username = config.workstationUsername;
         userPassword = config.workstationPassword;
+        hostname = config.workstationHostname;
         enableTilingWM = config.workstationEnableTilingWM;
         inherit
           nixvim

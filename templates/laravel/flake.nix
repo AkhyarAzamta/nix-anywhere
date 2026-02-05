@@ -39,6 +39,11 @@
             redis
           ];
 
+          services.mysql = {
+            enable = true;
+            initialDatabases = [{ name = "laravel"; }];
+          };
+
           env = {
             APP_ENV = "local";
           };

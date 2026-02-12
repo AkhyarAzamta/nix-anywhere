@@ -12,6 +12,7 @@
       profiles.default = {
         extensions = with pkgs.vscode-extensions; [
           thorerik.hacker-theme
+          pkief.material-icon-theme
 
           jnoortheen.nix-ide
           rust-lang.rust-analyzer
@@ -36,8 +37,9 @@
         ];
 
         userSettings = {
-          "workbench.colorTheme" = "Hacker";
+          "workbench.colorTheme" = "Hacker Theme";
           "workbench.iconTheme" = "material-icon-theme";
+          "material-icon-theme.activeIconPack" = "react";
 
           "workbench.colorCustomizations" = {
             "titleBar.activeBackground" = "#000000";
@@ -71,10 +73,12 @@
             "badge.foreground" = "#000000";
           };
 
-          "editor.fontFamily" = "'JetBrainsMono Nerd Font', 'Fira Code', monospace";
-          "editor.fontSize" = 14;
+          "editor.fontFamily" = "'Fira Code iScript', 'JetBrainsMono Nerd Font', 'Fira Code', monospace";
+          "editor.fontSize" = 17;
           "editor.fontLigatures" = true;
+          "editor.fontWeight" = "normal";
           "editor.lineHeight" = 1.6;
+          "editor.fontVariations" = true;
 
           "editor.smoothScrolling" = true;
           "editor.cursorBlinking" = "smooth";
@@ -86,25 +90,178 @@
           "editor.formatOnSave" = true;
           "editor.tabSize" = 2;
           "editor.wordWrap" = "on";
+          "editor.codeActionsOnSave" = {};
+
+          "editor.tokenColorCustomizations" = {
+            "textMateRules" = [
+              {
+                "scope" = [
+                  "comment"
+                  "keyword"
+                  "storage"
+                  "storage.type"
+                  "storage.modifier"
+                  "entity.name.function"
+                  "variable.language"
+                  "support.class"
+                  "constant.language"
+                ];
+                "settings" = {
+                  "fontStyle" = "italic";
+                };
+              }
+            ];
+          };
 
           "window.titleBarStyle" = "custom";
           "window.menuBarVisibility" = "toggle";
+          "window.customTitleBarVisibility" = "auto";
+          "workbench.activityBar.location" = "top";
+          "workbench.secondarySideBar.defaultVisibility" = "hidden";
 
-          "terminal.integrated.fontFamily" = "'JetBrainsMono Nerd Font'";
+          "terminal.integrated.fontFamily" = "'Fira Code iScript'";
           "terminal.integrated.fontSize" = 13;
+          "terminal.integrated.env.linux" = {};
+          "terminal.integrated.env.windows" = {};
+          "terminal.integrated.enableMultiLinePasteWarning" = "never";
 
           "files.autoSave" = "afterDelay";
           "files.autoSaveDelay" = 1000;
           "files.trimTrailingWhitespace" = true;
           "files.insertFinalNewline" = true;
+          "explorer.confirmDelete" = false;
+          "explorer.confirmDragAndDrop" = false;
+          "security.workspace.trust.untrustedFiles" = "open";
 
           "nix.enableLanguageServer" = true;
           "nix.serverPath" = "nil";
 
           "git.autofetch" = true;
           "git.confirmSync" = false;
+          "git.enableSmartCommit" = true;
+          "git.ignoreRebaseWarning" = true;
 
           "telemetry.telemetryLevel" = "off";
+          "redhat.telemetry.enabled" = false;
+
+          "json.schemas" = [];
+          "[json]" = {
+            "editor.defaultFormatter" = "vscode.json-language-features";
+          };
+          "[jsonc]" = {
+            "editor.defaultFormatter" = "vscode.json-language-features";
+          };
+
+          "[html]" = {
+            "editor.defaultFormatter" = "vscode.html-language-features";
+          };
+          "[css]" = {
+            "editor.defaultFormatter" = "vscode.css-language-features";
+          };
+          "[javascript]" = {
+            "editor.defaultFormatter" = "vscode.typescript-language-features";
+          };
+          "[javascriptreact]" = {
+            "editor.defaultFormatter" = "vscode.typescript-language-features";
+          };
+          "javascript.updateImportsOnFileMove.enabled" = "always";
+          "typescript.updateImportsOnFileMove.enabled" = "always";
+          "[typescriptreact]" = {
+            "editor.defaultFormatter" = "vscode.typescript-language-features";
+          };
+          "[python]" = {
+            "editor.formatOnType" = true;
+          };
+          "[php]" = {
+            "editor.defaultFormatter" = "DEVSENSE.phptools-vscode";
+          };
+          "[vue]" = {
+            "editor.defaultFormatter" = "Vue.volar";
+          };
+          "[blade]" = {
+            "editor.defaultFormatter" = "shufo.vscode-blade-formatter";
+          };
+          "[dockercompose]" = {
+            "editor.insertSpaces" = true;
+            "editor.tabSize" = 2;
+            "editor.autoIndent" = "advanced";
+            "editor.quickSuggestions" = {
+              "other" = true;
+              "comments" = false;
+              "strings" = true;
+            };
+            "editor.defaultFormatter" = "redhat.vscode-yaml";
+          };
+          "[github-actions-workflow]" = {
+            "editor.defaultFormatter" = "redhat.vscode-yaml";
+          };
+
+          "emmet.includeLanguages" = {
+            "javascript" = "html";
+          };
+
+          "fiveServer.browser" = [];
+          "fiveServer.php.executable" = "/usr/bin/php";
+          "fiveServer.ignore" = [];
+          "liveServer.settings.donotShowInfoMsg" = true;
+
+          "arduino.useArduinoCli" = true;
+          "arduino.ignoreBoards" = [];
+          "arduino.additionalUrls" = [
+            "https://dl.espressif.com/dl/package_esp32_index.json"
+            "http://arduino.esp8266.com/stable/package_esp8266com_index.json"
+          ];
+
+          "workbench.editorAssociations" = {
+            "*.sqlite3" = "default";
+            "*.sqlite" = "default";
+          };
+
+          "bootstrapIntelliSense.version" = "Bootstrap v5.3";
+          "bootstrapIntelliSense" = {
+            "enable" = false;
+            "bsVersion" = "5.3.7";
+            "useLocalFile" = false;
+            "cssFilePath" = "";
+            "languageSupport" = [];
+          };
+
+          "openapi.securityAuditToken" = "CiAlEyEUn8oC3blfowo8Cppd8PyrkbJllrtMiO5zV90Q1BIYVuH0QAVcMtPhX9gf3yZrpmLFSgwFPZYuGnQYypSqpIjr90Qj9QctS8/h8GzZfuPyY4qRenHMJHAVN0Scl5w8psMRvLFgiZa0d3rnwUoDS4XjIb20fVbUngR9Vm9r5hCnoKWqLVQm1UjcoUV/rPpFzvu/59L731azr2fOMBpNcnK2kNf6BF4h/99v/pA/Ag==";
+          "console-ninja.featureSet" = "Community";
+          "cmake.configureOnOpen" = true;
+          "cmake.pinnedCommands" = [
+            "workbench.action.tasks.configureTaskRunner"
+            "workbench.action.tasks.runTask"
+          ];
+          "cmake.options.advanced" = {
+            "build" = {
+              "statusBarVisibility" = "inherit";
+              "inheritDefault" = "visible";
+            };
+            "launch" = {
+              "statusBarVisibility" = "inherit";
+              "inheritDefault" = "visible";
+            };
+            "debug" = {
+              "statusBarVisibility" = "inherit";
+              "inheritDefault" = "visible";
+            };
+          };
+
+          "dart.flutterSdkPath" = "/usr/bin/flutter";
+          "android.sdkPath" = "/home/azam/android-sdk";
+          "prisma.showPrismaDataPlatformNotification" = false;
+          "codeium.enableCodeLens" = false;
+          "database-client.autoSync" = true;
+          "platformio-ide.pythonPath" = "/home/azam/.platformio/penv/bin/python";
+          "diffEditor.maxComputationTime" = 0;
+          "diffEditor.codeLens" = true;
+          "diffEditor.ignoreTrimWhitespace" = false;
+          "remote.portsAttributes" = {
+            "8000" = {
+              "protocol" = "http";
+            };
+          };
         };
       };
     };

@@ -144,6 +144,7 @@
           "telemetry.telemetryLevel" = "off";
           "redhat.telemetry.enabled" = false;
           "http.systemCertificates" = true;
+          "geminicodeassist.project" = "gen-lang-client-0553987156";
 
           "json.schemas" = [];
           "[json]" = {

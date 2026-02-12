@@ -39,7 +39,7 @@
 
       httpie
       xh
-      postman
+      postman # Unstable on Linux (try --disable-gpu if crashing)
 
       p7zip
       unrar

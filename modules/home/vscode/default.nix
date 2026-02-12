@@ -143,6 +143,7 @@
 
           "telemetry.telemetryLevel" = "off";
           "redhat.telemetry.enabled" = false;
+          "http.systemCertificates" = true;
 
           "json.schemas" = [];
           "[json]" = {

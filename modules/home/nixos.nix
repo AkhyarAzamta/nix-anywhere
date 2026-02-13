@@ -60,7 +60,7 @@
               elif [ "$capacity" -le 15 ]; then
                 ${pkgs.libnotify}/bin/notify-send -u critical "Moal di Cas ieu Batre?" "Sesa $capacity% deui. Kaburu Pareum."
               elif [ "$capacity" -le 20 ]; then
-                ${pkgs.libnotify}/bin/notify-send -u normal "Cas Heula ieu Batre" "$capacity% tingali"
+                ${pkgs.libnotify}/bin/notify-send -u normal "Cas Heula ieu Batre" "Tingali $capacity% deui!"
               fi
             fi
             sleep 120

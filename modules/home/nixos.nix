@@ -34,7 +34,7 @@
         experimental-features = [ "scale-monitor-framebuffer" ];
       };
       "org/gnome/desktop/interface" = {
-        text-scaling-factor = 1.5;
+        text-scaling-factor = 1.0;
         gtk-theme = "Catppuccin-Latte-Standard-Pink-Light";
         icon-theme = "Papirus-Light";
         cursor-theme = "catppuccin-mocha-pink-cursors";
@@ -56,11 +56,11 @@
 
             if [ -n "$capacity" ] && [ "$status" = "Discharging" ]; then
               if [ "$capacity" -le 10 ]; then
-                ${pkgs.libnotify}/bin/notify-send -u critical "Battery Critical!" "Only $capacity% remaining. Plug in NOW!"
+                ${pkgs.libnotify}/bin/notify-send -u critical "Pareum ieu mah aslina!" "Tingali ieu sesa $capacity% deui. Kumadinya we lah!"
+              elif [ "$capacity" -le 15 ]; then
+                ${pkgs.libnotify}/bin/notify-send -u critical "Moal di Cas ieu Batre?" "Sesa $capacity% deui. Kaburu Pareum."
               elif [ "$capacity" -le 20 ]; then
-                ${pkgs.libnotify}/bin/notify-send -u critical "Battery Low!" "Only $capacity% remaining. Please plug in soon."
-              elif [ "$capacity" -le 30 ]; then
-                ${pkgs.libnotify}/bin/notify-send -u normal "Battery Warning" "$capacity% remaining"
+                ${pkgs.libnotify}/bin/notify-send -u normal "Cas Heula ieu Batre" "$capacity% tingali"
               fi
             fi
             sleep 120

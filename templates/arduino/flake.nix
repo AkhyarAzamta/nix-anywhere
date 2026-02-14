@@ -14,13 +14,12 @@
           config.allowUnfree = true;
         };
 
-        # Wrap PlatformIO in an FHS environment to allow it to run binaries
-        # that expect standard paths like /bin/bash (e.g. avrdude)
-        fhs = pkgs.buildFHSEnv {
-          name = "platformio-shell";
+        # Wrap PlatformIO in an FHS environment so its downloaded binaries
+        # (like avrdude) that expect /bin/bash work correctly on NixOS
+        platformio-fhs = pkgs.buildFHSEnv {
+          name = "platformio";
           targetPkgs = pkgs: (with pkgs; [
-            platformio
-            avrdude
+            platformio-core
             python3
             gcc
             glibc
@@ -30,23 +29,46 @@
             systemd
             gnumake
             cmake
-            
-            # Common dependencies for platformio packages
             ncurses5
             ncurses
           ]);
-          
-          # Allow running the shell
-          runScript = "zsh";
+          runScript = "platformio";
+        };
 
-          # Set environment variables if needed
-          profile = ''
-            export PLATFORMIO_CORE_DIR=$PWD/.platformio
-          '';
+        # Also wrap pio (short alias)
+        pio-fhs = pkgs.buildFHSEnv {
+          name = "pio";
+          targetPkgs = pkgs: (with pkgs; [
+            platformio-core
+            python3
+            gcc
+            glibc
+            pkg-config
+            libusb1
+            zlib
+            systemd
+            gnumake
+            cmake
+            ncurses5
+            ncurses
+          ]);
+          runScript = "pio";
         };
       in
       {
-        devShells.default = fhs.env;
+        devShells.default = pkgs.mkShell {
+          buildInputs = [
+            platformio-fhs
+            pio-fhs
+            pkgs.avrdude
+          ];
+
+          shellHook = ''
+            echo "Arduino Development Environment"
+            echo "Commands: platformio, pio (both run inside FHS)"
+            echo ""
+          '';
+        };
       }
     );
 }

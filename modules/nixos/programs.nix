@@ -52,6 +52,11 @@
     dconf-editor
   ];
 
+  services.udev.packages = [ 
+    pkgs.platformio-core
+    pkgs.openocd
+  ];
+
   services.printing.enable = true;
 
   system.stateVersion = "25.05";

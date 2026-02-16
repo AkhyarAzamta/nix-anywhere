@@ -6,7 +6,7 @@
 {
   users.users.${username} = {
     isNormalUser = true;
-    description = "Maulana Sodiqin";
+    description = "Akhyar Azamta";
     extraGroups = [
       "networkmanager"
       "wheel"

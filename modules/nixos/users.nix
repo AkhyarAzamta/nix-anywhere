@@ -4,6 +4,8 @@
   ...
 }:
 {
+  users.groups.plugdev = { };
+
   users.users.${username} = {
     isNormalUser = true;
     description = "Akhyar Azamta";

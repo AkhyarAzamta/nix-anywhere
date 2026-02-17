@@ -28,6 +28,8 @@ in
     HibernateDelaySec=1h
   '';
 
+  users.groups.plugdev = { };
+
   users.users.${username}.extraGroups = [
     "wheel"
     "networkmanager"

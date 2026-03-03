@@ -234,6 +234,7 @@ in
       nautilus
       libnotify
       polkit_gnome
+      obs-studio
     ]
     ++ lib.optionals enableTilingWM [
       hyprpaper

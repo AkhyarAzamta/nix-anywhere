@@ -248,6 +248,7 @@ in
       obs-studio
       winbox
       scrcpy
+      zoom-us
     ]
     ++ lib.optionals enableTilingWM [
       hyprpaper

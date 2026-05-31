@@ -16,14 +16,18 @@
       in
       let
         # PlatformIO convenience scripts
-        pio-build         = pkgs.writeShellScriptBin "build"          "platformio run \"$@\"";
-        pio-upload        = pkgs.writeShellScriptBin "upload"         "platformio run --target upload \"$@\"";
-        pio-monitor       = pkgs.writeShellScriptBin "monitor"        "platformio device monitor \"$@\"";
-        pio-upload-monitor = pkgs.writeShellScriptBin "upload-monitor" "platformio run --target upload && platformio device monitor \"$@\"";
-        pio-clean         = pkgs.writeShellScriptBin "clean"          "platformio run --target clean \"$@\"";
-        pio-fullclean     = pkgs.writeShellScriptBin "fullclean"      "platformio run --target fullclean \"$@\"";
-        pio-devices       = pkgs.writeShellScriptBin "devices"        "platformio device list \"$@\"";
-        pio-progsize      = pkgs.writeShellScriptBin "progsize"       "platformio run --target size \"$@\"";
+        pio-build         = pkgs.writeShellScriptBin "pio-build"          "platformio run \"$@\"";
+        pio-upload        = pkgs.writeShellScriptBin "pio-upload"         "platformio run --target upload \"$@\"";
+        pio-monitor       = pkgs.writeShellScriptBin "pio-monitor"        "platformio device monitor \"$@\"";
+        pio-upload-monitor = pkgs.writeShellScriptBin "pio-upload-monitor" "platformio run --target upload && platformio device monitor \"$@\"";
+        pio-clean         = pkgs.writeShellScriptBin "pio-clean"          "platformio run --target clean \"$@\"";
+        pio-fullclean     = pkgs.writeShellScriptBin "pio-fullclean"      "platformio run --target fullclean \"$@\"";
+        pio-devices       = pkgs.writeShellScriptBin "pio-devices"        "platformio device list \"$@\"";
+        pio-progsize      = pkgs.writeShellScriptBin "pio-progsize"       "platformio run --target size \"$@\"";
+        pio-buildfs       = pkgs.writeShellScriptBin "pio-buildfs"        "platformio run --target buildfs \"$@\"";
+        pio-uploadfs      = pkgs.writeShellScriptBin "pio-uploadfs"       "platformio run --target uploadfs \"$@\"";
+        pio-uploadfs-ota  = pkgs.writeShellScriptBin "pio-uploadfs-ota"   "platformio run --target uploadfs --environment ota \"$@\"";
+        pio-erase         = pkgs.writeShellScriptBin "pio-erase"          "platformio run --target erase \"$@\"";
       in
       {
         devShells.default = pkgs.mkShell {
@@ -47,20 +51,30 @@
             pio-fullclean
             pio-devices
             pio-progsize
+            pio-buildfs
+            pio-uploadfs
+            pio-uploadfs-ota
+            pio-erase
           ];
 
           shellHook = ''
             echo "ESP8266 Development Environment (PlatformIO)"
             echo ""
-            echo "Commands:"
-            echo "  build          - Compile project"
-            echo "  upload         - Upload firmware"
-            echo "  monitor        - Serial monitor"
-            echo "  upload-monitor - Upload + monitor"
-            echo "  clean          - Clean build files"
-            echo "  fullclean      - Full clean"
-            echo "  devices        - List connected devices"
-            echo "  progsize       - Show program size"
+            echo "General:"
+            echo "  pio-build          - Compile project"
+            echo "  pio-upload         - Upload firmware"
+            echo "  pio-monitor        - Serial monitor"
+            echo "  pio-upload-monitor - Upload + monitor"
+            echo "  pio-clean          - Clean build files"
+            echo "  pio-fullclean      - Full clean"
+            echo "  pio-devices        - List connected devices"
+            echo ""
+            echo "Platform:"
+            echo "  pio-buildfs        - Build Filesystem Image"
+            echo "  pio-progsize       - Show program size"
+            echo "  pio-uploadfs       - Upload Filesystem Image"
+            echo "  pio-uploadfs-ota   - Upload Filesystem Image OTA"
+            echo "  pio-erase          - Erase Flash"
             echo ""
 
             # Fix shebangs in PlatformIO's downloaded packages

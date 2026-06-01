@@ -3,46 +3,45 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    devenv.url = "github:cachix/devenv";
-    nixpkgs-python.url = "github:cachix/nixpkgs-python";
-    nixpkgs-python.inputs.nixpkgs.follows = "nixpkgs";
-    flake-parts.url = "github:hercules-ci/flake-parts";
+    flake-utils.url = "github:numtide/flake-utils";
   };
 
-  nixConfig = {
-    extra-trusted-public-keys = "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw=";
-    extra-substituters = "https://devenv.cachix.org";
-  };
-
-  outputs = inputs@{ flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } {
-      imports = [ inputs.devenv.flakeModule ];
-      systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
-
-      perSystem = { config, self', inputs', pkgs, system, ... }: {
-        devenv.shells.default = {
-          name = "python-env";
-
-          languages.python = {
-            enable = true;
-            version = "3.11";
-            venv.enable = true;
-            venv.requirements = ./requirements.txt;
-          };
-
-          packages = with pkgs; [
-            python311Packages.pip
-            python311Packages.virtualenv
-            python311Packages.black
-            python311Packages.isort
-            python311Packages.pytest
+  outputs = { self, nixpkgs, flake-utils }:
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in
+      {
+        devShells.default = pkgs.mkShell {
+          buildInputs = with pkgs; [
+            python3
+            python3Packages.pip
+            python3Packages.virtualenv
+            python3Packages.black
+            python3Packages.isort
+            python3Packages.pytest
           ];
 
-          enterShell = ''
+          shellHook = ''
             echo "Python Development Environment"
             python --version
+            
+            # Setup virtualenv if it doesn't exist
+            if [ ! -d ".venv" ]; then
+              echo "Creating virtualenv..."
+              python -m venv .venv
+            fi
+            
+            # Activate virtual environment
+            source .venv/bin/activate
+            
+            # Install requirements if they exist
+            if [ -f "requirements.txt" ] && [ -s "requirements.txt" ]; then
+              echo "Installing requirements..."
+              pip install -r requirements.txt
+            fi
           '';
         };
-      };
-    };
+      }
+    );
 }

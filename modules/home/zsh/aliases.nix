@@ -18,6 +18,7 @@
     init-arduino = "cp ~/.config/nix/templates/arduino/{flake.nix,.envrc} . && direnv allow";
     init-esp8266 = "cp ~/.config/nix/templates/esp8266/{flake.nix,.envrc} . && direnv allow";
     init-esp32   = "cp ~/.config/nix/templates/esp32/{flake.nix,.envrc} . && direnv allow";
+    init-python  = "cp ~/.config/nix/templates/python/{flake.nix,.envrc,requirements.txt} . && direnv allow";
 
     ls = "eza --icons";
     ll = "eza -la --icons";

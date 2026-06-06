@@ -53,6 +53,7 @@
           scripts.test.exec = "php artisan test";
 
           enterShell = ''
+            export PATH="$HOME/.config/composer/vendor/bin:$PATH"
             echo "Laravel 12 Development Environment"
             echo "PHP: $(php -v | head -1)"
             echo "Composer: $(composer --version)"

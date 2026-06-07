@@ -15,7 +15,13 @@
       jq
       yq
 
+      gparted
+      gnome-disk-utility
+
       nodejs_22
+      (pkgs.writeShellScriptBin "gemini-cli" ''
+        exec ${pkgs.nodejs_22}/bin/npx -y @google/gemini-cli "$@"
+      '')
       pnpm
       bun
       go

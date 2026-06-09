@@ -4,76 +4,78 @@
   ...
 }:
 {
-  home-manager.users.${username}.home = {
-    packages = with pkgs; [
-      eza
-      bat
-      fzf
-      zoxide
-      ripgrep
-      fd
-      jq
-      yq
+  home-manager.users.${username} = {
+    home = {
+      packages = with pkgs; [
+        eza
+        bat
+        fzf
+        zoxide
+        ripgrep
+        fd
+        jq
+        yq
 
-      gparted
-      gnome-disk-utility
+        gparted
+        gnome-disk-utility
 
-      nodejs_22
-      (pkgs.writeShellScriptBin "gemini-cli" ''
-        exec ${pkgs.nodejs_22}/bin/npx -y @google/gemini-cli "$@"
-      '')
-      pnpm
-      bun
-      go
-      python3
-      dotnet-sdk
+        nodejs_22
+        (pkgs.writeShellScriptBin "gemini-cli" ''
+          exec ${pkgs.nodejs_22}/bin/npx -y @google/gemini-cli "$@"
+        '')
+        pnpm
+        bun
+        go
+        python3
+        dotnet-sdk
 
-      docker-compose
-      lazydocker
+        docker-compose
+        lazydocker
 
-      lazygit
-      gh
-      delta
+        lazygit
+        gh
+        delta
 
-      ncdu
-      duf
-      procs
-      bottom
-      htop
-      tldr
-      brightnessctl
-      swayosd
+        ncdu
+        duf
+        procs
+        bottom
+        htop
+        tldr
+        brightnessctl
+        swayosd
 
-      httpie
-      xh
-      postman # Unstable on Linux (try --disable-gpu if crashing)
+        httpie
+        xh
+        postman # Unstable on Linux (try --disable-gpu if crashing)
 
-      p7zip
-      unrar
+        p7zip
+        unrar
 
-      slack
+        slack
 
-      google-chrome
-      antigravity
-      arduino-ide
+        google-chrome
+        antigravity
+        arduino-ide
 
-      imagemagick
-      ffmpeg
-    ];
+        imagemagick
+        ffmpeg
+      ];
 
-    sessionVariables = {
-      EDITOR = "nvim";
-      GOPATH = "$HOME/go";
+      sessionVariables = {
+        EDITOR = "nvim";
+        GOPATH = "$HOME/go";
+      };
+
+      sessionPath = [
+        "$HOME/.local/bin"
+        "$HOME/go/bin"
+        "$HOME/.bun/bin"
+      ];
     };
 
     xdg.configFile."nixpkgs/config.nix".text = ''
       { allowUnfree = true; }
     '';
-
-    sessionPath = [
-      "$HOME/.local/bin"
-      "$HOME/go/bin"
-      "$HOME/.bun/bin"
-    ];
   };
 }

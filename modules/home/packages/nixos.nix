@@ -64,6 +64,7 @@
     sessionVariables = {
       EDITOR = "nvim";
       GOPATH = "$HOME/go";
+      NIXPKGS_ALLOW_UNFREE = "1";
     };
 
     sessionPath = [

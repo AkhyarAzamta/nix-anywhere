@@ -64,8 +64,11 @@
     sessionVariables = {
       EDITOR = "nvim";
       GOPATH = "$HOME/go";
-      NIXPKGS_ALLOW_UNFREE = "1";
     };
+
+    xdg.configFile."nixpkgs/config.nix".text = ''
+      { allowUnfree = true; }
+    '';
 
     sessionPath = [
       "$HOME/.local/bin"

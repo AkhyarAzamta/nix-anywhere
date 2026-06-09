@@ -75,7 +75,12 @@
     };
 
     xdg.configFile."nixpkgs/config.nix".text = ''
-      { allowUnfree = true; }
+      { 
+        allowUnfree = true;
+        permittedInsecurePackages = [
+          "ventoy-1.1.10"
+        ];
+      }
     '';
   };
 }
